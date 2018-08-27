@@ -10,7 +10,7 @@ TRAIN_FILE = 'train.txt'
 data = {}
 
 with open(TRAIN_FILE, 'r') as f:
-    for line in f.readlines()[:20]:
+    for line in f.readlines():
         line = line.strip()
         line = line.split('\t')
         data.setdefault(line[0], line[1:])
@@ -25,19 +25,19 @@ for i in sorted(data.keys()):
 start_time = time.time()
 
 graph = nx.DiGraph(data)
-print 'Graph constructing time: {}'.format(time.time() - start_time)
+print 'Graph constructing time: {} hours'.format((time.time() - start_time)/3600)
 print 'The number of nodes: {}'.format(graph.number_of_nodes())
 print
 
 start_time = time.time()
 
 adjm = nx.adjacency_matrix(graph)
-print 'Adjacency constructing time: {}'.format(time.time() - start_time)
+print 'Adjacency constructing time: {} hours'.format((time.time() - start_time)/3600)
 
 binf = open('adjm.bin', 'wb')
 start_time = time.time()
 pickle.dump(adjm, binf)
-print 'pickle storing time: {}'.format(time.time() - start_time)
+print 'pickle storing time: {} hours'.format((time.time() - start_time)/3600)
 binf.close()
 
 #print adjm.todense()
